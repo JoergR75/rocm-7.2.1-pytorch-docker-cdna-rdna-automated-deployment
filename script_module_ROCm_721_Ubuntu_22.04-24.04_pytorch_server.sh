@@ -17,7 +17,7 @@
 #
 # Kernel Versions Tested:
 #   - Ubuntu 22.04.5: 5.15.0-171
-#   - Ubuntu 24.04.4: 6.8.0-100
+#   - Ubuntu 24.04.4: 6.8.0-101
 #
 # Supported Hardware:
 #   - AMD CDNA1 | CDNA2 | CDNA3 | CDNA4 | RDNA3 | RDNA4 GPU Architectures | Strix APU Architecture
