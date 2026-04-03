@@ -111,3 +111,219 @@ python3 test.py
 Expected Output Example:
 
 <img width="901" height="290" alt="{BA60D6AC-8DEA-45C2-BB42-BB2F42A9F346}" src="https://github.com/user-attachments/assets/f2a67558-6cdb-40e2-a3b4-80789344262a" />
+
+More details about the ROCm driver version can be reviewed:
+```bash
+apt show rocm-libs -a
+```
+
+<img width="964" height="472" alt="{851E66D0-2E64-47BF-9D57-DE9298D96EDF}" src="https://github.com/user-attachments/assets/72c9acfb-81b8-4861-a86a-22e76673d06e" />
+
+## ⏻ Setting the right Power Management with `rocm-smi`
+
+ROCm provides basic power and performance management controls via `rocm-smi`.  
+For RDNA and CDNA GPUs, predefined performance profiles can be used to balance **power efficiency** and **maximum performance**:
+
+- **Compute** – Optimized for latency-sensitive and “bursty” workloads. It avoids electrical or thermal overshoots that can occur when multiple WGPs are activated simultaneously.
+- **3D Full Screen** – Designed for gaming with “inverted bathtub” activity profiles.
+- **VR** – Ensures minimum performance requirements are met without consuming more power than necessary.
+- **Video** – Historically tuned to minimize power for video playback, but recent profiles optimize **VCN performance** for encoding and transcoding workloads.
+
+Use the following command to verify the active power profile:
+
+```bash
+rocm-smi --showprofile
+```
+The star (*) marks the current profile which is set to **BOOTUP DEFAULT**
+
+<img width="955" height="418" alt="{47D793DA-4B98-4279-A98C-02D5B0E19603}" src="https://github.com/user-attachments/assets/90224340-630a-4555-b448-e84ae54eb91a" />
+
+Set the GPU to the high-performance / compute-optimized power profile.
+This profile prioritizes sustained clocks and higher power limits, making it well suited for AI inference, training, and other compute-intensive workloads.
+It may increase power consumption but helps ensure consistent performance under load.
+
+```bash
+rocm-smi --setprofile 4
+```
+
+<img width="939" height="237" alt="{66B98679-C70F-44BC-9C08-CBAFAD62B7C0}" src="https://github.com/user-attachments/assets/049e36aa-2460-4d29-8032-3cc9183eaafc" />
+
+## 📶 ROCm Bandwidth Test
+
+**AMD’s ROCm Bandwidth Test utility** with the **`tb p2p` (Peer-to-peer device memory bandwidth test)** flag runs a complete set of bandwidth diagnostics.
+
+### What it does
+
+`rocm-bandwidth-test` is a diagnostic tool included in ROCm that measures **memory bandwidth performance** between:
+
+- Host (CPU) ↔ GPU(s)  
+- GPU ↔ GPU (if multiple GPUs are installed)  
+- GPU internal memory  
+
+### `tb p2p` option
+
+Using the `--run tb p2p` flag runs **Peer-to-peer device memory bandwidth test**, including:
+
+- **Host-to-Device (H2D)** bandwidth  
+- **Device-to-Host (D2H)** bandwidth  
+- **Device-to-Device (D2D)** bandwidth (for multi-GPU)  
+- **Bidirectional / concurrent** bandwidth tests  
+
+Run the P2P test
+```bash
+cd /opt/rocm/bin && ./rocm_bandwidth_test plugin --run tb p2p
+```
+
+### Output
+
+The tool prints results in a **matrix format** showing bandwidth (GB/s) between every device pair.
+
+<img width="983" height="1179" alt="{6EAC522F-550D-4881-9C78-11B3A90A555D}" src="https://github.com/user-attachments/assets/039f0f87-79b8-4dd0-856b-d959025b27a4" />
+
+More details about the setup can be verified by
+```bash
+cd /opt/rocm/bin && ./rocm_bandwidth_test plugin --run tb
+```
+
+<img width="861" height="275" alt="{4103D9C7-2ECE-42CF-A231-DC1D7004C7BF}" src="https://github.com/user-attachments/assets/e0a1efaf-9c5c-4c6c-b2d9-8ff14cf1b623" />
+
+⚠️ **Caution:**  
+Make sure **"Re-Size BAR"** is enabled in the **SBIOS**.  
+If it is disabled, **P2P** will be deactivated, as shown below:
+
+<img width="977" height="777" alt="{FD9B95A3-BEFA-4857-8BBB-8D06A90108F2}" src="https://github.com/user-attachments/assets/cc148322-45b3-4164-b215-521276749f9d" />
+
+More details about the setup can be verified by
+```bash
+cd /opt/rocm/bin && ./rocm_bandwidth_test plugin --run tb
+```
+
+<img width="904" height="274" alt="{3F58A790-E952-4BD9-9F0A-B99FD8F0B081}" src="https://github.com/user-attachments/assets/28b1808a-8216-4d7c-b1ea-db599f140056" />
+
+### ⚙️ How to Enable **Re-Size BAR** in SBIOS (example ASRock WRX90 evo)
+
+1. Enter **SBIOS**
+
+<img width="1007" height="760" alt="{F9649127-0F1F-4E14-8008-1F3782FBBDEF}" src="https://github.com/user-attachments/assets/9685c1a4-ecab-4fea-8e91-dd21b9869c7e" />
+
+3. Navigate to **Advanced**
+
+<img width="1018" height="761" alt="{135D3B4C-0732-4652-A3C0-1224D275A515}" src="https://github.com/user-attachments/assets/b1cdc3ce-b526-4cdc-b44f-71d1119cf6d7" />
+
+5. Go to **PCI Subsystem Settings** and change **Re-Size BAR Support** to **Enable** 
+
+<img width="1016" height="761" alt="{3C54C3DA-8B82-483C-AEA5-D0A511508780}" src="https://github.com/user-attachments/assets/60536e2b-e59f-4486-a1fc-ab3ff33a3cd8" />
+
+## 🐋 Docker Integration
+
+The script sets up a Docker environment with GPU passthrough support via ROCm.
+
+Check Docker installation and version
+```bash
+docker -v
+```
+
+<img width="935" height="58" alt="{5C81E868-4389-4580-988D-A13C34F1963B}" src="https://github.com/user-attachments/assets/2119225b-044c-4e4d-967f-2c6dd554715d" />
+
+### 🤖 vLLM Docker Images
+
+To use vLLM optimized for RDNA4 and CDNA:
+
+Use the container image you need.
+
+**RDNA4** architecture running on Ubuntu 24.04
+```bash
+docker pull rocm/vllm-dev:rocm7.2_navi_ubuntu24.04_py3.12_pytorch_2.9_vllm_0.14.0rc0
+```
+
+<img width="960" height="690" alt="{090CA25D-C862-437F-A61B-1C4C235FE0EB}" src="https://github.com/user-attachments/assets/e03ee8d6-8436-4b51-909d-52d504b655bf" />
+
+Further vLLM Docker versions for RDNA4 can be verified on Docker Hub:  
+https://hub.docker.com/r/rocm/vllm-dev/tags?name=navi
+
+or for **CDNA** architecture
+```bash
+sudo docker pull rocm/vllm:latest
+```
+
+Run vLLM with all available AMD GPU access (example for RDNA4 on Ubuntu 24.04)
+```bash
+sudo docker run -it \
+    --device=/dev/kfd \
+    --device=/dev/dri \
+    --security-opt seccomp=unconfined \
+    --group-add video \
+    rocm/vllm-dev:rocm7.2_navi_ubuntu24.04_py3.12_pytorch_2.9_vllm_0.14.0rc0
+```
+
+<img width="954" height="149" alt="{74DEF1F8-EC94-4015-8FF1-8B24B6554763}" src="https://github.com/user-attachments/assets/6e67ae9e-6874-4b30-9d31-22ba4d740c47" />
+
+With `rocm-smi`, you can verify all available GPUs (in this case, 2× Radeon AI PRO R9700 GPUs).
+
+<img width="960" height="412" alt="{5BA15566-340C-4D66-8F07-6E85BA5A09C1}" src="https://github.com/user-attachments/assets/562ac5eb-bb8b-429c-80e4-7d5c7aee044b" />
+
+or `amd-smi`
+
+<img width="946" height="403" alt="{35EFA5E7-C3E2-4EF0-876F-AFDCD5EF68EF}" src="https://github.com/user-attachments/assets/efda1960-d4f6-480f-bb73-82ec663996c3" />
+
+If you need to add a specific GPU, you can use the **passthrough** option.  
+First, verify the available GPUs in the `/dev/dri` directory (host).
+```bash
+cd /dev/dri && ls
+```
+
+<img width="941" height="60" alt="{E317C1FB-07B6-4492-B217-D43F001129B4}" src="https://github.com/user-attachments/assets/856b810b-737b-49cb-a1fd-f4081eca13f5" />
+
+Let's choose **GPU2**, also referred to as **"card2"** or **"renderD129"**.
+```bash
+sudo docker run -it \
+    --device=/dev/kfd \
+    --device=/dev/dri/card2 \
+    --device=/dev/dri/renderD129 \
+    --security-opt seccomp=unconfined \
+    --group-add video \
+    rocm/vllm-dev:rocm7.2_navi_ubuntu24.04_py3.12_pytorch_2.9_vllm_0.14.0rc0
+```
+GPU2 has been added to the container
+
+<img width="961" height="522" alt="{F1AD2594-BDD5-49B3-B875-17DD0C4283C7}" src="https://github.com/user-attachments/assets/e1958915-9ef6-440f-840a-01e734f509aa" />
+
+## How to Save a Modified Docker Container
+
+1️⃣ Open your container and modify it as needed (e.g., install packages, change configurations).
+
+**⚠️ Note: Do not stop or close the container!**
+
+2️⃣ Open another terminal (CLI) window.
+
+3️⃣ Verify the running and stopped containers:
+```bash
+sudo docker ps -a
+```
+
+<img width="964" height="183" alt="{28889A6F-A904-4442-9F2A-A07F7FA54FE4}" src="https://github.com/user-attachments/assets/b741f153-191e-4234-af67-f254ff173d1f" />
+
+4️⃣ In this example, we want to save the running container `unruffled_ramanujan` as a new image named `my-vllm-image:rocm7.2`:
+```bash
+docker commit unruffled_ramanujan my-vllm-image:rocm7.2
+```
+
+<img width="946" height="49" alt="{0B5FCABD-DC2E-4E11-87E1-D02D008A13BD}" src="https://github.com/user-attachments/assets/faf585bc-31dd-42b3-8c4f-acd1a63601aa" />
+
+5️⃣ Verify that the new image was created successfully:
+```bash
+sudo docker images
+```
+
+<img width="969" height="110" alt="{32CADCEC-D818-44A9-B750-F8BB6307495A}" src="https://github.com/user-attachments/assets/b22b2ddf-0897-468d-b742-1b86246bfd4d" />
+
+6️⃣ Start a new container with one GPU (renderD129):
+```bash
+sudo docker run -it \
+    --device=/dev/kfd \
+    --device=/dev/dri/card2 \
+    --device=/dev/dri/renderD129 \
+    --security-opt seccomp=unconfined \
+    --group-add video \
+    my-vllm-image:rocm7.2
+```
