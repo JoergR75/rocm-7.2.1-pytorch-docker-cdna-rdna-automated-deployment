@@ -404,7 +404,7 @@ printf "\n 🔹 Start the vLLM Docker container:\n"
 printf "  sudo docker run -it --device=/dev/kfd --device=/dev/dri \\
     --security-opt seccomp=unconfined --group-add video rocm/vllm-dev:rocm7.2.1_navi_ubuntu24.04_py3.12_pytorch_2.9_vllm_0.16.0\n"
 
-printf "\nThe container will run using the image 'rocm/vllm-dev:rocm7.2_navi_ubuntu24.04_py3.12_pytorch_2.9_vllm_0.14.0rc0', with flags enabling AMD GPU access via ROCm.\n\n"
+printf "\nThe container will run using the image 'rocm/vllm-dev:rocm7.2.1_navi_ubuntu24.04_py3.12_pytorch_2.9_vllm_0.16.0', with flags enabling AMD GPU access via ROCm.\n\n"
 
 # reboot option
 print ' 🔄 Reboot system now (recommended)? (y/n)'
