@@ -119,35 +119,6 @@ apt show rocm-libs -a
 
 <img width="1004" height="518" alt="{040BF8EE-EA7B-4C4D-9F35-38AEEB05FA18}" src="https://github.com/user-attachments/assets/357b8aa1-62e0-480b-9356-10a3111fbe76" />
 
-## ⏻ Setting the right Power Management with `rocm-smi`
-
-ROCm provides basic power and performance management controls via `rocm-smi`.  
-For RDNA and CDNA GPUs, predefined performance profiles can be used to balance **power efficiency** and **maximum performance**:
-
-- **Compute** – Optimized for latency-sensitive and “bursty” workloads. It avoids electrical or thermal overshoots that can occur when multiple WGPs are activated simultaneously.
-- **3D Full Screen** – Designed for gaming with “inverted bathtub” activity profiles.
-- **VR** – Ensures minimum performance requirements are met without consuming more power than necessary.
-- **Video** – Historically tuned to minimize power for video playback, but recent profiles optimize **VCN performance** for encoding and transcoding workloads.
-
-Use the following command to verify the active power profile:
-
-```bash
-rocm-smi --showprofile
-```
-The star (*) marks the current profile which is set to **BOOTUP DEFAULT**
-
-<img width="955" height="418" alt="{47D793DA-4B98-4279-A98C-02D5B0E19603}" src="https://github.com/user-attachments/assets/90224340-630a-4555-b448-e84ae54eb91a" />
-
-Set the GPU to the high-performance / compute-optimized power profile.
-This profile prioritizes sustained clocks and higher power limits, making it well suited for AI inference, training, and other compute-intensive workloads.
-It may increase power consumption but helps ensure consistent performance under load.
-
-```bash
-rocm-smi --setprofile 4
-```
-
-<img width="939" height="237" alt="{66B98679-C70F-44BC-9C08-CBAFAD62B7C0}" src="https://github.com/user-attachments/assets/049e36aa-2460-4d29-8032-3cc9183eaafc" />
-
 ## 📶 ROCm Bandwidth Test
 
 **AMD’s ROCm Bandwidth Test utility** with the **`tb p2p` (Peer-to-peer device memory bandwidth test)** flag runs a complete set of bandwidth diagnostics.
