@@ -72,7 +72,6 @@ wget https://raw.githubusercontent.com/JoergR75/rocm-7.2.1-pytorch-docker-cdna-r
 ```
 
 
-
 ### 3️⃣ **Run the Installer**
 ```bash
 bash script_module_ROCm_721_Ubuntu_22.04-24.04_pytorch_server.sh
