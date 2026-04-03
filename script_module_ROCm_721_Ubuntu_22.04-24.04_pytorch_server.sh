@@ -99,7 +99,7 @@ install_jellyfish() {
     read -n1 -r -p "Press any key to continue..." key
 
     # Download the installer script
-    wget https://repo.radeon.com/amdgpu-install/7.2/ubuntu/jammy/amdgpu-install_7.2.70200-1_all.deb
+    wget https://repo.radeon.com/amdgpu-install/7.2.1/ubuntu/jammy/amdgpu-install_7.2.1.70201-1_all.deb
     # install latest headers and static library files necessary for building C++ programs which use libstdc++
     sudo DEBIAN_FRONTEND=noninteractive apt-get install "linux-headers-$(uname -r)" "linux-modules-extra-$(uname -r)" -yq
     sudo DEBIAN_FRONTEND=noninteractive apt-get install python3-setuptools python3-wheel libpython3.10 -yq
@@ -107,7 +107,7 @@ install_jellyfish() {
     sudo DEBIAN_FRONTEND=noninteractive apt-get install git-lfs -yq
 
     # Install with "default" settings (no interaction)
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq ./amdgpu-install_7.2.70200-1_all.deb --allow-downgrades
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq ./amdgpu-install_7.2.1.70201-1_all.deb --allow-downgrades
 
     # Installing multiple use cases including ROCm 7.2.1, OCL and HIP SDK
 
@@ -197,7 +197,7 @@ install_noble() {
     read -n1 -r -p "Press any key to continue..." key
 
     # Download the installer script
-    wget https://repo.radeon.com/amdgpu-install/7.2/ubuntu/noble/amdgpu-install_7.2.70200-1_all.deb
+    wget https://repo.radeon.com/amdgpu-install/7.2.1/ubuntu/noble/amdgpu-install_7.2.1.70201-1_all.deb
     # Install the necessary headers and static library files
     sudo DEBIAN_FRONTEND=noninteractive apt install "linux-headers-$(uname -r)" "linux-modules-extra-$(uname -r)" --yes
     sudo DEBIAN_FRONTEND=noninteractive apt install python3-setuptools python3-wheel libpython3.12 --yes
@@ -205,7 +205,7 @@ install_noble() {
     sudo DEBIAN_FRONTEND=noninteractive apt install git-lfs --yes
 
     # Install with "default" settings (no interaction)
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq ./amdgpu-install_7.2.70200-1_all.deb --allow-downgrades
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq ./amdgpu-install_7.2.1.70201-1_all.deb --allow-downgrades
 
     # Installing multiple use cases including ROCm 7.2.1, OCL and HIP SDK
 
