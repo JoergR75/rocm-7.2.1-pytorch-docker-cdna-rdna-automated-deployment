@@ -117,7 +117,7 @@ More details about the ROCm driver version can be reviewed:
 apt show rocm-libs -a
 ```
 
-<img width="1110" height="498" alt="{B9D43BD1-2A9B-4A20-BA4F-481A7FC9073F}" src="https://github.com/user-attachments/assets/a17cc0cf-dd75-4036-959c-d3bb6be80d89" />
+<img width="1018" height="518" alt="{2F4F32F4-DF09-4D94-89C4-054E36EEF2DB}" src="https://github.com/user-attachments/assets/e0b55e4d-0f75-4533-933b-83b44c26031e" />
 
 ## ⏻ Setting the right Power Management with `rocm-smi`
 
