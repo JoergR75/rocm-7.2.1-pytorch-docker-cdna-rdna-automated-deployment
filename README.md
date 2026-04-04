@@ -232,7 +232,7 @@ sudo docker run -it \
 
 With `rocm-smi`, you can verify all available GPUs (in this case, 2× Radeon AI PRO R9700 GPUs).
 
-<img width="960" height="412" alt="{5BA15566-340C-4D66-8F07-6E85BA5A09C1}" src="https://github.com/user-attachments/assets/562ac5eb-bb8b-429c-80e4-7d5c7aee044b" />
+<img width="812" height="198" alt="image" src="https://github.com/user-attachments/assets/56102532-45d9-4d4a-a400-17f86aaefed7" />
 
 or `amd-smi`
 
