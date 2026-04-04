@@ -299,3 +299,5 @@ sudo docker run -it \
     --group-add video \
     rocm/vllm-dev:rocm7.2.1_navi_ubuntu24.04_py3.12_pytorch_2.9_vllm_0.16.0_2
 ```
+
+<img width="828" height="395" alt="image" src="https://github.com/user-attachments/assets/e7349f84-b08b-4500-988d-19aff77025be" />
