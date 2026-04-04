@@ -236,7 +236,7 @@ With `rocm-smi`, you can verify all available GPUs (in this case, 2× Radeon AI 
 
 or `amd-smi`
 
-<img width="946" height="403" alt="{35EFA5E7-C3E2-4EF0-876F-AFDCD5EF68EF}" src="https://github.com/user-attachments/assets/efda1960-d4f6-480f-bb73-82ec663996c3" />
+<img width="625" height="334" alt="image" src="https://github.com/user-attachments/assets/23fdac90-720b-4ab8-9d50-b2e67bd90cf5" />
 
 If you need to add a specific GPU, you can use the **passthrough** option.  
 First, verify the available GPUs in the `/dev/dri` directory (host).
