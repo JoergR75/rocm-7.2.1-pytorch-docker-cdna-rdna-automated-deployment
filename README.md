@@ -275,9 +275,9 @@ sudo docker ps -a
 
 <img width="844" height="126" alt="image" src="https://github.com/user-attachments/assets/b879c0a2-a071-4307-adba-0da66534fd15" />
 
-4️⃣ In this example, we want to save the running container `unruffled_ramanujan` as a new image named `my-vllm-image:rocm7.2`:
+4️⃣ In this example, we want to save the running container `loving_wescoff` as a new image named `rocm/vllm-dev:rocm7.2.1_navi_ubuntu24.04_py3.12_pytorch_2.9_vllm_0.16.0_2`:
 ```bash
-docker commit unruffled_ramanujan my-vllm-image:rocm7.2
+docker commit loving_wescoff rocm/vllm-dev:rocm7.2.1_navi_ubuntu24.04_py3.12_pytorch_2.9_vllm_0.16.0_2
 ```
 
 <img width="946" height="49" alt="{0B5FCABD-DC2E-4E11-87E1-D02D008A13BD}" src="https://github.com/user-attachments/assets/faf585bc-31dd-42b3-8c4f-acd1a63601aa" />
@@ -297,5 +297,5 @@ sudo docker run -it \
     --device=/dev/dri/renderD129 \
     --security-opt seccomp=unconfined \
     --group-add video \
-    my-vllm-image:rocm7.2
+    rocm/vllm-dev:rocm7.2.1_navi_ubuntu24.04_py3.12_pytorch_2.9_vllm_0.16.0_2
 ```
