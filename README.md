@@ -208,7 +208,7 @@ Use the container image you need.
 docker pull rocm/vllm-dev:rocm7.2.1_navi_ubuntu24.04_py3.12_pytorch_2.9_vllm_0.16.0
 ```
 
-<img width="765" height="542" alt="image" src="https://github.com/user-attachments/assets/0e0e74f4-a223-4484-a4be-f6059aed25f6" />
+<img width="763" height="590" alt="image" src="https://github.com/user-attachments/assets/7e13abbb-73c4-4d95-9204-2f240837c625" />
 
 Further vLLM Docker versions for RDNA4 can be verified on Docker Hub:  
 https://hub.docker.com/r/rocm/vllm-dev/tags?name=navi
