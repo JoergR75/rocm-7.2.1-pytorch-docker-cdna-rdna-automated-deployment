@@ -275,7 +275,6 @@ sudo docker ps -a
 
 <img width="844" height="126" alt="image" src="https://github.com/user-attachments/assets/b879c0a2-a071-4307-adba-0da66534fd15" />
 
-
 4️⃣ In this example, we want to save the running container `unruffled_ramanujan` as a new image named `my-vllm-image:rocm7.2`:
 ```bash
 docker commit unruffled_ramanujan my-vllm-image:rocm7.2
