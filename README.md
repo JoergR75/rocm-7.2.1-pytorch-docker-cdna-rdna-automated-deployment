@@ -273,7 +273,7 @@ GPU2 has been added to the container
 sudo docker ps -a
 ```
 
-<img width="964" height="183" alt="{28889A6F-A904-4442-9F2A-A07F7FA54FE4}" src="https://github.com/user-attachments/assets/b741f153-191e-4234-af67-f254ff173d1f" />
+<img width="844" height="126" alt="image" src="https://github.com/user-attachments/assets/b879c0a2-a071-4307-adba-0da66534fd15" />
 
 4️⃣ In this example, we want to save the running container `unruffled_ramanujan` as a new image named `my-vllm-image:rocm7.2`:
 ```bash
