@@ -287,7 +287,7 @@ docker commit loving_wescoff rocm/vllm-dev:rocm7.2.1_navi_ubuntu24.04_py3.12_pyt
 sudo docker images
 ```
 
-<img width="969" height="110" alt="{32CADCEC-D818-44A9-B750-F8BB6307495A}" src="https://github.com/user-attachments/assets/b22b2ddf-0897-468d-b742-1b86246bfd4d" />
+<img width="855" height="138" alt="image" src="https://github.com/user-attachments/assets/86a03be1-e4e2-4e88-8a28-6d362fb14d7b" />
 
 6️⃣ Start the new container with one GPU (renderD129):
 ```bash
