@@ -228,7 +228,7 @@ sudo docker run -it \
     rocm/vllm-dev:rocm7.2.1_navi_ubuntu24.04_py3.12_pytorch_2.9_vllm_0.16.0
 ```
 
-<img width="954" height="149" alt="{74DEF1F8-EC94-4015-8FF1-8B24B6554763}" src="https://github.com/user-attachments/assets/6e67ae9e-6874-4b30-9d31-22ba4d740c47" />
+<img width="618" height="124" alt="image" src="https://github.com/user-attachments/assets/fa7e620f-d082-4c0e-802b-a3be7f9fbab7" />
 
 With `rocm-smi`, you can verify all available GPUs (in this case, 2× Radeon AI PRO R9700 GPUs).
 
