@@ -3,6 +3,7 @@
 import torch
 import subprocess
 import platform
+import transformers
 import re
 import os
 
@@ -37,6 +38,7 @@ if __name__ == "__main__":
 print("\n ✅ PyTorch version:", torch.__version__)
 print(" 🧪 ROCm version:", subprocess.getoutput("/opt/rocm/bin/hipconfig --version"))
 print(" ✅ Is ROCm available:", torch.version.hip is not None)
+print(" 🤗 Transformers version:", transformers.__version__)
 print("\n ⚡ Number of GPUs:", torch.cuda.device_count())
 
 if torch.cuda.device_count() > 0:
